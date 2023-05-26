@@ -58,6 +58,71 @@
       font-size: 36px
     }
 
+    .headline {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .content {
+    display: flex; /* Use flexbox to place sections in parallel */
+    justify-content: space-between; /* Add space between sections */
+    align-items: flex-start; /* Align sections to the top */
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .about-me {
+    flex: 1; /* Grow to take available space */
+    margin-right: 20px; /* Add spacing between sections */
+  }
+
+  .about-me h2 {
+      font-size: 40px;
+      font-family: "Space Mono", Arial, serif;
+  }
+
+
+  .about-me h3 {
+      font-size: 20px;
+      font-family: "Space Mono", Arial, serif;
+  }
+
+  .contact-info {
+    flex: 4; /* Grow to take available space */
+  }
+
+  .contact-info h2 {
+    font-size: 25px;
+     font-family: "Space Mono", Arial, serif;
+  }
+
+  .contact-info h3 {
+    font-size: 15px;
+    font-family: "Space Mono", Arial, serif;
+  }
+
+  .cv-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .key-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+
     </style>
 </head>
 <body>
@@ -72,5 +137,21 @@
         <a href="https://discord.gg/f_dmedicis#9880"><i class="fab fa-discord"></i> </a>
     </div>
 </div>
+<div class="content">
+    <div class="about-me">
+        <h2>About Me</h2>
+        <h3>My name is Fernando de Medicis. I am an engineer with great experience with cloud infrastructure, linux and container technologies. I love automation and I am fascinated with Python programming and AI</h3>
+        <a href="static/files/2023-FernandoDeMedicis-DEVOPS" class="cv-button" download>Download CV</a>
+    </div>
+</div>
+<div class="content">
+    <div class="contact-info">
+        <h2>Contact Information</h2>
+        <h3>Email: fernando.demedicis@protonmail.com</h3>
+        <h3>Location: Spain</h3>
+        <a href="static/files/fdmedicis-pub" class="key-button" download>Download Public Key</a>
+    </div>
+</div>
+
 </body>
 </html>
