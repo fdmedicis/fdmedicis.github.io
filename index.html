@@ -1,1 +1,76 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <style>
+
+    .header {
+        padding: 160px;
+        text-align: center;
+        color: white;
+        position: relative; /* Add relative positioning */
+    }
+
+    .background-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(rgba(128, 0, 0, 0.5), rgba(0, 128, 0, 0.5)),url("static/images/background-setup-3.jpeg");
+        background-size: cover;
+        background-position: center;
+        filter: brightness(1.2) saturate(1.5) hue-rotate(90deg); /* Add green filter to the background image */
+        z-index: -1; /* Place the background image behind the content */
+    }
+
+    .profile-img {
+      display: inline-block;
+      width: 150px;
+      height: 150px;
+      border: 2px solid white;
+      border-radius: 50%;
+    }
+
+    .header h1 {
+      font-family: "Helbetica", cursive;
+      font-size: 40px;
+    }
+
+    .header h3 {
+      font-size: 20px;
+      font-family: "Space Mono", Arial, serif;
+      font-weight: 200;
+      margin: 0 0 20px 0;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin-right: 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+      font-size: 36px
+    }
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="background-overlay"></div>
+    <img src="static/images/luffy.png" alt="Profile Picture" class="profile-img">
+    <h1>Fernando de Médicis</h1>
+    <h3>Consultant / DevOps engineer</h3>
+    <div class="social-icons">
+        <a href="https://github.com/fdmedicis"><i class="fab fa-github"></i> </a>
+        <a href="https://www.linkedin.com/in/fernando-de-medicis-62bb37b9/?locale=en_US"><i class="fab fa-linkedin"></i> </a>
+        <a href="https://discord.gg/f_dmedicis#9880"><i class="fab fa-discord"></i> </a>
+    </div>
+</div>
+</body>
+</html>
