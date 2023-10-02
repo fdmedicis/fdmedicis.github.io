@@ -126,19 +126,56 @@
    .menu {
         text-align: center;
         background-color: #333;
-        padding: 10px 0;
-   }
+        overflow: hidden;
+    }
 
     .menu a {
+        float: left;
+        display: block;
         color: white;
+        text-align: center;
+        padding: 14px 16px;
         text-decoration: none;
-        margin: 0 15px;
-        font-size: 16px;
     }
 
     .menu a:hover {
-        text-decoration: underline;
+        background-color: #ddd;
+        color: black;
     }
+
+    .content {
+        display: none;
+    }
+
+    .visible {
+        display: block;
+    }
+
+    .projects {
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns, adjust as needed */
+        grid-gap: 20px; /* Spacing between projects */
+    }
+
+    .project {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    .project a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .project-description {
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
 
     </style>
 </head>
@@ -155,28 +192,62 @@
     </div>
 </div>
 <div class="menu">
-    <a href="#about-me">About Me</a>
-    <a href="#projects">Projects</a>
-    <a href="#blog">Blog</a>
+    <a href="javascript:void(0);" onclick="toggleSection('about-me')">About Me</a>
+    <a href="javascript:void(0);" onclick="toggleSection('projects')">Projects</a>
+    <a href="javascript:void(0);" onclick="toggleSection('blog')">Blog</a>
 </div>
-<div class="header">
-    <!-- Your header content here -->
-</div>
-<div class="content" id="about-me">
+<!--<div class="header">-->
+<!--    &lt;!&ndash; Your header content here &ndash;&gt;-->
+<!--</div>-->
+<div id="about-me" class="content visible">
     <div class="about-me">
-        <!-- Your about me content here -->
+        <h2>About Me</h2>
+        <h3>My name is Fernando de Medicis. I am an engineer with great experience with cloud infrastructure, linux and container technologies. I love automation and I am fascinated with Python programming and AI.</h3>
+        <a href="static/files/2023-FernandoDeMedicis-DEVOPS.pdf" class="cv-button" download>Download CV</a>
     </div>
-</div>
-<div class="content" id="projects">
-    <div class="project-section">
-        <!-- Your project section content here -->
+    <div class="contact-info">
+        <h2>Contact Information</h2>
+        <h3>Email: fernando.demedicis@protonmail.com</h3>
+        <h3>Location: Spain</h3>
+        <a href="static/files/fdmedicis.pub" class="key-button" download>Download Public Key</a>
     </div>
+
 </div>
-<div class="content" id="blog">
-    <div class="blog-section">
-        <!-- Your blog section content here -->
+<div id="projects" class="content">
+    <div class="headline">
+        <h2>Projects</h2>
     </div>
+    <div class="projects">
+        <!-- Project 1 -->
+        <div class="project">
+            <a href="https://github.com/fdmedicis/aws-sns-slack-terraform" target="_blank">AWS-SNS-SLACK-TERRAFORM</a>
+            <p class="project-description">Terraform module to use a AWS SNS topic to send messages to Slack</p>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project">
+            <a href="https://github.com/fdmedicis/simple-arpspoof-detector" target="_blank">simple-arpspoof-detector</a>
+            <p class="project-description">Simple python program and detect if your APR traffic is being spoofed.</p>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project">
+            <a href="https://github.com/fdmedicis/python-rest-container-bday" target="_blank">python-rest-container-bday</a>
+            <p class="project-description">A simple python API container that helps you to calculate how many days until your birthday.</p>
+        </div>
 </div>
+<div id="blog" class="content">
+    <h2>Blog</h2>
+</div>
+<script>
+    function toggleSection(sectionId) {
+        var sections = document.querySelectorAll('.content');
+        for (var i = 0; i < sections.length; i++) {
+            sections[i].classList.remove('visible');
+        }
+        document.getElementById(sectionId).classList.add('visible');
+    }
+</script>
 <div class="content">
     <div class="about-me">
         <h2>About Me</h2>
