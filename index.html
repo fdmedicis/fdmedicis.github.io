@@ -176,6 +176,33 @@
         font-size: 14px;
     }
 
+    .blog {
+        margin-top: 20px;
+    }
+
+    .blog-entry {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px; /* Spacing between blog entries */
+    }
+
+    .blog-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .blog-date {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .blog-content {
+        margin-top: 10px;
+        font-size: 14px;
+    }
 
     </style>
 </head>
@@ -235,9 +262,32 @@
             <a href="https://github.com/fdmedicis/python-rest-container-bday" target="_blank">python-rest-container-bday</a>
             <p class="project-description">A simple python API container that helps you to calculate how many days until your birthday.</p>
         </div>
+    </div>
 </div>
 <div id="blog" class="content">
-    <h2>Blog</h2>
+    <!-- Blog Section -->
+    <div class="headline">
+        <h2>Blog</h2>
+    </div>
+    <div class="blog">
+        <!-- Blog Entry 1 -->
+        <div class="blog-entry">
+            <div class="blog-title">Blog Entry 1</div>
+            <div class="blog-date">Published on January 1, 2023</div>
+            <div class="blog-content">
+                <p>This is the content of Blog Entry 1. You can write your blog post here.</p>
+            </div>
+        </div>
+        <!-- Blog Entry 2 -->
+        <div class="blog-entry">
+            <div class="blog-title">Blog Entry 2</div>
+            <div class="blog-date">Published on February 15, 2023</div>
+            <div class="blog-content">
+                <p>This is the content of Blog Entry 2. You can write your blog post here.</p>
+            </div>
+        </div>
+
+    </div>
 </div>
 <script>
     function toggleSection(sectionId) {
@@ -248,21 +298,5 @@
         document.getElementById(sectionId).classList.add('visible');
     }
 </script>
-<div class="content">
-    <div class="about-me">
-        <h2>About Me</h2>
-        <h3>My name is Fernando de Medicis. I am an engineer with great experience with cloud infrastructure, linux and container technologies. I love automation and I am fascinated with Python programming and AI.</h3>
-        <a href="static/files/2023-FernandoDeMedicis-DEVOPS.pdf" class="cv-button" download>Download CV</a>
-    </div>
-</div>
-<div class="content">
-    <div class="contact-info">
-        <h2>Contact Information</h2>
-        <h3>Email: fernando.demedicis@protonmail.com</h3>
-        <h3>Location: Spain</h3>
-        <a href="static/files/fdmedicis.pub" class="key-button" download>Download Public Key</a>
-    </div>
-</div>
-
 </body>
 </html>
