@@ -1,304 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>DevOps Engineer FDMEDICIS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fernando de Medicis — Senior Platform &amp; DevOps Engineer</title>
+    <meta name="description" content="Senior Platform &amp; DevOps Engineer — cloud cost optimization, infrastructure automation. 13+ years rescuing and rebuilding platforms.">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/images/f.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" rel="stylesheet">
     <style>
 
-    .header {
-        padding: 160px;
-        text-align: center;
-        color: white;
-        position: relative; /* Add relative positioning */
+    :root {
+        --bg: #0d1117;
+        --bg-raised: #12181f;
+        --border: #232b33;
+        --text: #d7dde3;
+        --text-dim: #8b96a2;
+        --accent: #4fd1a5;
     }
 
-    .background-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: linear-gradient(rgba(128, 0, 0, 0.5), rgba(0, 128, 0, 0.5)),url("static/images/background-setup-3.jpeg");
-        background-size: cover;
-        background-position: center;
-        filter: brightness(1.2) saturate(1.5) hue-rotate(90deg); /* Add green filter to the background image */
-        z-index: -1; /* Place the background image behind the content */
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Space Mono", "Courier New", monospace;
+        line-height: 1.6;
+    }
+
+    a { color: var(--accent); }
+
+    main {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 80px 24px 40px;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 56px;
     }
 
     .profile-img {
-      display: inline-block;
-      width: 150px;
-      height: 150px;
-      border: 2px solid white;
-      border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        border: 2px solid var(--border);
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
     }
 
-    .header h1 {
-      font-family: "Helbetica", cursive;
-      font-size: 40px;
-    }
-
-    .header h3 {
-      font-size: 20px;
-      font-family: "Space Mono", Arial, serif;
-      font-weight: 200;
-      margin: 0 0 20px 0;
-    }
-
-    .social-icons a {
-      display: inline-block;
-      margin-right: 10px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .social-icons {
-      margin-top: 20px;
-      font-size: 36px
+    h1 {
+        font-size: 28px;
+        margin: 0 0 8px;
     }
 
     .headline {
-      text-align: center;
-      margin-bottom: 20px;
+        font-size: 16px;
+        color: var(--text);
+        margin: 0 0 4px;
     }
 
-    .content {
-    display: flex; /* Use flexbox to place sections in parallel */
-    justify-content: space-between; /* Add space between sections */
-    align-items: flex-start; /* Align sections to the top */
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px;
-  }
-
-  .about-me {
-    flex: 1; /* Grow to take available space */
-    margin-right: 20px; /* Add spacing between sections */
-  }
-
-  .about-me h2 {
-      font-size: 40px;
-      font-family: "Space Mono", Arial, serif;
-  }
-
-
-  .about-me h3 {
-      font-size: 20px;
-      font-family: "Space Mono", Arial, serif;
-  }
-
-  .contact-info {
-    flex: 5; /* Grow to take available space */
-  }
-
-  .contact-info h2 {
-    font-size: 25px;
-    font-family: "Space Mono", Arial, serif;
-  }
-
-  .contact-info h3 {
-    font-size: 15px;
-    font-family: "Space Mono", Arial, serif;
-  }
-
-  .cv-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-
-  .key-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: green;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-   .menu {
-        text-align: center;
-        background-color: #333;
-        overflow: hidden;
+    .sub-line {
+        font-size: 14px;
+        color: var(--text-dim);
+        margin: 0 0 20px;
     }
 
-    .menu a {
-        float: left;
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
+    .social-icons {
+        font-size: 22px;
+    }
+
+    .social-icons a {
+        display: inline-block;
+        margin: 0 8px;
+        color: var(--text-dim);
+    }
+
+    .social-icons a:hover { color: var(--accent); }
+
+    section {
+        margin-bottom: 44px;
+    }
+
+    section h2 {
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin: 0 0 16px;
+    }
+
+    .profile-text {
+        font-size: 15px;
+    }
+
+    .capabilities {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+    }
+
+    .capabilities li {
+        padding: 6px 0 6px 22px;
+        position: relative;
+    }
+
+    .capabilities li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+    }
+
+    .methodology p {
+        font-size: 15px;
+    }
+
+    .availability {
+        font-size: 14px;
+        color: var(--text-dim);
+    }
+
+    .availability strong {
+        color: var(--accent);
+        font-weight: normal;
+    }
+
+    .contact-list {
+        list-style: none;
+        margin: 0 0 24px;
+        padding: 0;
+        font-size: 15px;
+    }
+
+    .contact-list li {
+        padding: 4px 0;
+    }
+
+    .contact-list i {
+        width: 20px;
+        color: var(--text-dim);
+    }
+
+    .buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 10px 18px;
+        border: 1px solid var(--border);
+        background: var(--bg-raised);
+        color: var(--text);
         text-decoration: none;
-    }
-
-    .menu a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-
-    .content {
-        display: none;
-    }
-
-    .visible {
-        display: block;
-    }
-
-    .projects {
-        margin-top: 20px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Two columns, adjust as needed */
-        grid-gap: 20px; /* Spacing between projects */
-    }
-
-    .project {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 20px;
-    }
-
-    .project a {
-        text-decoration: none;
-        color: #333;
-        font-weight: bold;
-    }
-
-    .project-description {
-        margin-top: 10px;
+        border-radius: 4px;
+        font-family: inherit;
         font-size: 14px;
     }
 
-    .blog {
-        margin-top: 20px;
+    .btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
     }
 
-    .blog-entry {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        padding: 20px;
-        margin-bottom: 20px; /* Spacing between blog entries */
+    footer {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-dim);
+        padding: 24px;
+        border-top: 1px solid var(--border);
     }
 
-    .blog-title {
-        font-size: 20px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .blog-date {
-        color: #777;
-        font-size: 14px;
-    }
-
-    .blog-content {
-        margin-top: 10px;
-        font-size: 14px;
+    @media (max-width: 480px) {
+        main { padding: 48px 20px 32px; }
+        h1 { font-size: 24px; }
     }
 
     </style>
 </head>
 <body>
-<div class="header">
-    <div class="background-overlay"></div>
-    <img src="static/images/fer.png" alt="Profile Picture" class="profile-img">
-    <h1>Fernando de Medicis</h1>
-    <h3>Consultant / DevOps engineer</h3>
-    <div class="social-icons">
-        <a href="https://github.com/fdmedicis"><i class="fab fa-github"></i> </a>
-        <a href="https://www.linkedin.com/in/fernando-de-medicis/"><i class="fab fa-linkedin"></i> </a>
-        <a href="https://discord.com/users/f_dmedicis"><i class="fab fa-discord"></i> </a>
-    </div>
-</div>
-<div class="menu">
-    <a href="javascript:void(0);" onclick="toggleSection('about-me')">About Me</a>
-    <a href="javascript:void(0);" onclick="toggleSection('projects')">Projects</a>
-    <a href="javascript:void(0);" onclick="toggleSection('blog')">Blog</a>
-</div>
-<!--<div class="header">-->
-<!--    &lt;!&ndash; Your header content here &ndash;&gt;-->
-<!--</div>-->
-<div id="about-me" class="content visible">
-    <div class="about-me">
-        <h2>About Me</h2>
-        <h3>My name is Fernando de Medicis. I am an engineer with great experience with cloud infrastructure, linux and container technologies. I love automation and I am fascinated with Python programming and AI.</h3>
-        <a href="static/files/2023-FernandoDeMedicis-DEVOPS.pdf" class="cv-button" download>Download CV</a>
-    </div>
-    <div class="contact-info">
-        <h2>Contact Information</h2>
-        <h3>Email: fernando.demedicis@protonmail.com</h3>
-        <h3>Location: Spain</h3>
-        <a href="static/files/fdmedicis.pub" class="key-button" download>Download Public Key</a>
-    </div>
+<main>
 
-</div>
-<div id="projects" class="content">
-    <div class="headline">
-        <h2>Projects</h2>
-    </div>
-    <div class="projects">
-        <!-- Project 1 -->
-        <div class="project">
-            <a href="https://github.com/fdmedicis/aws-sns-slack-terraform" target="_blank">AWS-SNS-SLACK-TERRAFORM</a>
-            <p class="project-description">Terraform module to use a AWS SNS topic to send messages to Slack</p>
+    <header>
+        <img src="static/images/fer.png" alt="Fernando de Medicis" class="profile-img">
+        <h1>Fernando de Medicis</h1>
+        <p class="headline">Senior Platform &amp; DevOps Engineer</p>
+        <p class="sub-line">Cloud cost optimization · Infrastructure automation</p>
+        <div class="social-icons">
+            <a href="https://github.com/fdmedicis" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/fernando-de-medicis/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
         </div>
+    </header>
 
-        <!-- Project 2 -->
-        <div class="project">
-            <a href="https://github.com/fdmedicis/simple-arpspoof-detector" target="_blank">simple-arpspoof-detector</a>
-            <p class="project-description">Simple python program and detect if your APR traffic is being spoofed.</p>
-        </div>
+    <section class="profile">
+        <p class="profile-text">
+            Senior platform and DevOps engineer with 13+ years in cloud infrastructure,
+            automation and reliability. I build platforms from the ground up and rescue
+            ones that others got wrong — creating the automation and self-service tooling
+            that lets engineering teams ship without friction.
+        </p>
+    </section>
 
-        <!-- Project 3 -->
-        <div class="project">
-            <a href="https://github.com/fdmedicis/python-rest-container-bday" target="_blank">python-rest-container-bday</a>
-            <p class="project-description">A simple python API container that helps you to calculate how many days until your birthday.</p>
+    <section class="capabilities-section">
+        <h2>What I do</h2>
+        <ul class="capabilities">
+            <li>Rescue &amp; rebuild inherited platforms</li>
+            <li>Cut cloud costs by design (~90% on a rebuilt platform)</li>
+            <li>Self-service delivery that removes ops as a bottleneck</li>
+            <li>Modern automation — IaC, CI/CD, and AI/agentic tooling</li>
+        </ul>
+    </section>
+
+    <section class="methodology">
+        <h2>On cost</h2>
+        <p>
+            I treat cloud cost as a design constraint, not an afterthought. On one
+            inherited platform, re-architecture and automation cut spend ~90%.
+            <a href="#" title="Write-up coming soon">How I think about cost →</a>
+        </p>
+    </section>
+
+    <section class="availability-section">
+        <p class="availability">Freelance — <strong>open to platform &amp; DevOps work.</strong></p>
+    </section>
+
+    <section class="contact">
+        <h2>Contact</h2>
+        <ul class="contact-list">
+            <li><i class="fas fa-envelope"></i> <a href="mailto:fernando.demedicis@gmail.com">fernando.demedicis@gmail.com</a></li>
+            <li><i class="fab fa-github"></i> <a href="https://github.com/fdmedicis" target="_blank" rel="noopener">github.com/fdmedicis</a></li>
+            <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/fernando-de-medicis/" target="_blank" rel="noopener">/in/fernando-de-medicis</a></li>
+            <li><i class="fas fa-map-marker-alt"></i> Netherlands &amp; Spain (remote)</li>
+        </ul>
+        <div class="buttons">
+            <a href="static/files/2026_Fernando_De_Medicis_CV.pdf" class="btn" download>Download CV</a>
+            <a href="static/files/fdmedicis.pub" class="btn" download>Download Public Key</a>
         </div>
-    </div>
-</div>
-<div id="blog" class="content">
-    <!-- Blog Section -->
-    <div class="headline">
-        <h2>Blog</h2>
-    </div>
-    <div class="line">
-        <h2>No Entries yet</h2>
-    </div>
-<!--    <div class="blog">-->
-<!--        &lt;!&ndash; Blog Entry 1 &ndash;&gt;-->
-<!--        <div class="blog-entry">-->
-<!--            <div class="blog-title">Blog Entry 1</div>-->
-<!--            <div class="blog-date">Published on January 1, 2023</div>-->
-<!--            <div class="blog-content">-->
-<!--                <p>This is the content of Blog Entry 1. You can write your blog post here.</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Blog Entry 2 &ndash;&gt;-->
-<!--        <div class="blog-entry">-->
-<!--            <div class="blog-title">Blog Entry 2</div>-->
-<!--            <div class="blog-date">Published on February 15, 2023</div>-->
-<!--            <div class="blog-content">-->
-<!--                <p>This is the content of Blog Entry 2. You can write your blog post here.</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-</div>
-<script>
-    function toggleSection(sectionId) {
-        var sections = document.querySelectorAll('.content');
-        for (var i = 0; i < sections.length; i++) {
-            sections[i].classList.remove('visible');
-        }
-        document.getElementById(sectionId).classList.add('visible');
-    }
-</script>
+    </section>
+
+</main>
+<footer>
+    No trackers. No cookies.
+</footer>
 </body>
 </html>
