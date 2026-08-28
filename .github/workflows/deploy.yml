@@ -1,0 +1,64 @@
+# .github/workflows/deploy.yml
+# Lives in: fdmedicis.github.io
+# Syncs the site to S3 + invalidates CloudFront, via OIDC — no stored AWS keys.
+# The CloudFront distribution ID is looked up at runtime from the domain alias,
+# so there is no CLOUDFRONT_DISTRIBUTION_ID variable to maintain.
+
+name: deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**"
+      - "!README.md"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: eu-central-1            # <-- your region
+  SITE_DIR: "."                       # site root; change if the HTML is in a subfolder
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Sync to S3
+        run: |
+          aws s3 sync "${{ env.SITE_DIR }}" "s3://${{ vars.SITE_BUCKET }}" \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "README.md"
+
+      - name: Resolve CloudFront distribution ID from alias
+        id: cf
+        run: |
+          DIST_ID=$(aws cloudfront list-distributions \
+            --query "DistributionList.Items[?Aliases.Items[?contains(@, '${{ vars.SITE_BUCKET }}')]].Id" \
+            --output text)
+          if [ -z "$DIST_ID" ] || [ "$DIST_ID" = "None" ]; then
+            echo "::error::No CloudFront distribution found with alias ${{ vars.SITE_BUCKET }}"
+            exit 1
+          fi
+          echo "Found distribution: $DIST_ID"
+          echo "dist_id=$DIST_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ steps.cf.outputs.dist_id }}" \
+            --paths "/*"
