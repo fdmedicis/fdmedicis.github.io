@@ -22,10 +22,11 @@ jobs:
       contents: read
       pull-requests: write # verdict comment on the PR
     # Pinned to the exact release commit, not the movable @v1 tag. Bump both together.
-    uses: fdmedicis/cross-model-review-gate/.github/workflows/review-gate.yml@d05c43d226cc03d502f2446faf0a7a03014edf93 # v1.0.5
+    uses: fdmedicis/cross-model-review-gate/.github/workflows/review-gate.yml@0f3e4311ea38416a593a31eadbc9af2409310b82 # v1.1.0
     with:
-      provider: copilot
+      provider: copilot # if Copilot gives no verdict, OpenAI reviews (its key is passed below)
       mode: merge
-      gate_ref: d05c43d226cc03d502f2446faf0a7a03014edf93 # v1.0.5, same commit as above
+      gate_ref: 0f3e4311ea38416a593a31eadbc9af2409310b82 # v1.1.0, same commit as above
     secrets:
       COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # fallback reviewer
