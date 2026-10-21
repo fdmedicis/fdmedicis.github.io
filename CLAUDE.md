@@ -12,6 +12,9 @@ My public landing page and portfolio. GitHub Pages serves `main` directly, so
 - **The cross-model review gate is a required check on pull requests**
   (`.github/workflows/review-gate.yml`). Never remove, skip or weaken it without my
   explicit approval in the pull request.
+- **Bypass is mine alone.** If no reviewer is available, only I may let a PR through,
+  by adding the `review-gate-bypass` label. Claude must never add that label: Claude's
+  GitHub access acts as my account, so the gate could not tell the difference.
 - **Content is public and professional.** Nothing offensive, misleading or
   infringing. Only images I have the right to publish.
 - **No secrets, ever.** No tokens, keys or private contact data beyond what is
