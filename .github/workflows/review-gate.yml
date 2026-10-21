@@ -1,0 +1,31 @@
+# Cross-model review gate (fdmedicis/cross-model-review-gate), merge mode.
+#
+# GitHub Pages serves main directly, so the only safe place to stop a bad change
+# is before it merges. A second model (Copilot, not Claude) reviews every pull
+# request and comments its verdict. Make "review-gate / review gate" a required
+# status check in a ruleset for main, and this becomes a hard gate.
+#
+# Pull requests from forks get no secrets, so the gate fails closed on them.
+
+name: review-gate
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  review-gate:
+    permissions:
+      contents: read
+      pull-requests: write # verdict comment on the PR
+    # Pinned to the exact release commit, not the movable @v1 tag. Bump both together.
+    uses: fdmedicis/cross-model-review-gate/.github/workflows/review-gate.yml@d05c43d226cc03d502f2446faf0a7a03014edf93 # v1.0.5
+    with:
+      provider: copilot
+      mode: merge
+      gate_ref: d05c43d226cc03d502f2446faf0a7a03014edf93 # v1.0.5, same commit as above
+    secrets:
+      COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
