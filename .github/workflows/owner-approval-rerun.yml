@@ -1,0 +1,57 @@
+# When the repo owner approves a pull request, re-run its "owner approval" job
+# (review-gate.yml) so the check turns green and auto-merge can proceed.
+#
+# Re-runs ONLY that job, and only when the review gate in the same run passed.
+# It never re-runs the gate itself: approving must not buy a second roll of the
+# reviewer's dice on a not-valid verdict. The job re-checks the approval through
+# the API, so this workflow grants nothing by itself.
+
+name: owner-approval-rerun
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: read
+
+jobs:
+  rerun:
+    if: >-
+      github.event.review.state == 'approved' &&
+      github.event.review.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: write # re-run a job in this repo
+    steps:
+      - name: Re-run "owner approval" for the approved commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          # Newest run for this commit AND this pull request (two PRs can share a head commit).
+          run_id="$(gh api "repos/$REPO/actions/workflows/review-gate.yml/runs?event=pull_request&head_sha=$HEAD&per_page=50" \
+                    --jq "[.workflow_runs[] | select(any(.pull_requests[]; .number == $PR))] | first | .id // empty")"
+          if [ -z "$run_id" ]; then
+            echo "No review-gate run for $HEAD yet; its owner approval job will see the approval when it runs."
+            exit 0
+          fi
+          jobs="$(gh api "repos/$REPO/actions/runs/$run_id/jobs?per_page=100")"
+          gate="$(jq -r '[.jobs[] | select(.name | endswith("review gate"))] | last | .conclusion // ""' <<<"$jobs")"
+          approval_id="$(jq -r '[.jobs[] | select(.name == "owner approval")] | last | .id // ""' <<<"$jobs")"
+          approval="$(jq -r '[.jobs[] | select(.name == "owner approval")] | last | .conclusion // ""' <<<"$jobs")"
+          echo "run $run_id: review gate=${gate:-running}, owner approval=${approval:-running}"
+          if [ "$gate" != "success" ]; then
+            echo "The review gate has not passed for $HEAD; approving does not change that."
+            exit 0
+          fi
+          if [ "$approval" != "failure" ]; then
+            echo "Nothing to re-run (owner approval: ${approval:-still running, it will see the approval})."
+            exit 0
+          fi
+          gh api -X POST "repos/$REPO/actions/jobs/$approval_id/rerun" --silent
+          echo "Re-ran owner approval (job $approval_id)."

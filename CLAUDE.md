@@ -12,6 +12,12 @@ My public landing page and portfolio. GitHub Pages serves `main` directly, so
 - **The cross-model review gate is a required check on pull requests**
   (`.github/workflows/review-gate.yml`). Never remove, skip or weaken it without my
   explicit approval in the pull request.
+- **Asymmetric merge.** The required "owner approval" check passes at once for a VALID
+  low-risk pull request, and only after my approval of the exact head commit for a
+  high-risk one (the files below count as high risk whatever the reviewer says).
+  You act as the `ferlab-claude` GitHub App: open the pull request and enable
+  auto-merge (`gh pr merge --auto --squash`); low risk then goes live by itself and
+  high risk waits for me. Never use my personal credentials to approve or merge.
 - **Content is public and professional.** Nothing offensive, misleading or
   infringing. Only images I have the right to publish.
 - **No secrets, ever.** No tokens, keys or private contact data beyond what is

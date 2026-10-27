@@ -1,9 +1,17 @@
-# Cross-model review gate (fdmedicis/cross-model-review-gate), merge mode.
+# Cross-model review gate (fdmedicis/cross-model-review-gate), merge mode,
+# plus the owner's approval for high-risk changes.
 #
 # GitHub Pages serves main directly, so the only safe place to stop a bad change
 # is before it merges. A second model (Copilot, not Claude) reviews every pull
-# request and comments its verdict. Make "review-gate / review gate" a required
-# status check in a ruleset for main, and this becomes a hard gate.
+# request and comments its verdict. Both checks below are required in the ruleset
+# for main:
+#   review-gate / review gate  the second model's verdict must be VALID.
+#   owner approval             low risk passes at once, so a VALID low-risk pull
+#                              request can auto-merge. High risk passes only once
+#                              the repo owner has approved the exact head commit.
+# Claude acts as the ferlab-claude GitHub App: it can enable auto-merge on its own
+# pull requests, but it cannot approve them, so high risk always waits for Fernando.
+# When he approves, owner-approval-rerun.yml re-runs the "owner approval" job.
 #
 # Pull requests from forks get no secrets, so the gate fails closed on them.
 
@@ -30,3 +38,63 @@ jobs:
     secrets:
       COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # fallback reviewer
+
+  owner-approval:
+    name: owner approval
+    needs: review-gate
+    # Always runs, so a failed or skipped gate shows up as a failed check here too,
+    # never as a skipped one (GitHub counts a skipped required check as passing).
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Low risk passes; high risk needs the owner's approval of this commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          PR: ${{ github.event.pull_request.number }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+          GATE_RESULT: ${{ needs.review-gate.result }}
+          GATE_RISK: ${{ needs.review-gate.outputs.risk_tier }}
+        run: |
+          set -euo pipefail
+          if [ "$GATE_RESULT" != "success" ]; then
+            echo "::error::The review gate did not pass (result: $GATE_RESULT). Nothing to approve."
+            exit 1
+          fi
+
+          # Files this repo's CLAUDE.md calls high risk. Decided by code here, whatever
+          # tier the reviewer picked: workflows, governance, security files.
+          files="$(gh api "repos/$REPO/pulls/$PR/files?per_page=100" --paginate \
+                   --jq '.[] | .filename, (.previous_filename // empty)')"
+          risky="$(grep -E '^(\.github/|\.claude/|CLAUDE\.md$|\.well-known/|static/files/.*\.pub$|CNAME$)' <<<"$files" || true)"
+
+          # Fail closed: anything other than exactly "low" from the gate counts as high.
+          if [ "$GATE_RISK" = "low" ] && [ -z "$risky" ]; then
+            echo "Low risk and VALID: no owner approval needed."
+            exit 0
+          fi
+          echo "High risk (gate: '${GATE_RISK:-none}')."
+          [ -n "$risky" ] && printf 'High-risk files:\n%s\n' "$risky"
+
+          # The owner cannot approve his own pull request on GitHub; opening it is his approval.
+          if [ "$AUTHOR" = "$OWNER" ]; then
+            echo "Opened by the owner ($OWNER): no separate approval needed."
+            exit 0
+          fi
+
+          # The owner's latest decision on THIS head commit. A new push needs a new approval.
+          state="$(gh api "repos/$REPO/pulls/$PR/reviews?per_page=100" --paginate \
+                   --jq ".[] | select(.user.login == \"$OWNER\" and .commit_id == \"$HEAD\" and .state != \"COMMENTED\") | .state" \
+                   | tail -n 1)"
+          if [ "$state" = "APPROVED" ]; then
+            echo "Approved by $OWNER on $HEAD."
+            exit 0
+          fi
+          echo "::error::High-risk change: waiting for $OWNER to approve commit $HEAD (latest owner review: ${state:-none})."
+          exit 1
