@@ -1,7 +1,11 @@
 # Photo credits
 
 Alternative profile photos for the landing page. Each is public domain or CC0,
-cropped to a 400×400 square. `fer.png` (one level up) is my own photo.
+cropped to a 400×400 square. `me.jpg` is my own photo (from `fer.png`).
+
+The page always shows `static/images/profile.jpg`, a copy of one of these. To
+change the photo, overwrite that file with another one from here (the lab bot
+does this), so the pull request carries the picture itself and the review gate sees it.
 
 | File | Original | Author | License |
 |---|---|---|---|
