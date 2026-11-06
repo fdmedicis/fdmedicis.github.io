@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>I say two words. An AI changes my website. — Fernando de Medicis</title>
+    <meta name="description" content="A governed agentic pipeline: a voice note becomes a pull request, a second AI reviews it, low-risk changes deploy themselves. Live in 131 seconds.">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/images/f.png">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono:400,700" rel="stylesheet">
+    <style>
+
+    :root {
+        --bg: #0d1117;
+        --bg-raised: #12181f;
+        --border: #232b33;
+        --text: #d7dde3;
+        --text-dim: #8b96a2;
+        --accent: #4fd1a5;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Space Mono", "Courier New", monospace;
+        line-height: 1.6;
+    }
+
+    a { color: var(--accent); }
+
+    main {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 48px 24px 40px;
+    }
+
+    .back {
+        font-size: 13px;
+        color: var(--text-dim);
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 40px;
+    }
+
+    .back:hover { color: var(--accent); }
+
+    h1 {
+        font-size: 26px;
+        line-height: 1.35;
+        margin: 0 0 12px;
+    }
+
+    .standfirst {
+        font-size: 15px;
+        color: var(--text-dim);
+        margin: 0 0 8px;
+    }
+
+    .dateline {
+        font-size: 13px;
+        color: var(--text-dim);
+        margin: 0 0 48px;
+    }
+
+    h2 {
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin: 48px 0 16px;
+    }
+
+    p { font-size: 15px; }
+
+    ol, ul { font-size: 15px; padding-left: 22px; }
+    ol li, ul li { margin-bottom: 10px; }
+
+    strong { color: #fff; }
+
+    .pull {
+        border-left: 2px solid var(--accent);
+        padding: 2px 0 2px 18px;
+        margin: 28px 0;
+        color: var(--text);
+        font-size: 15px;
+    }
+
+    .verdict {
+        display: inline-block;
+        border: 1px solid var(--border);
+        background: var(--bg-raised);
+        border-radius: 3px;
+        padding: 1px 7px;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .verdict.no { color: #e5826f; border-color: #4a2e28; }
+    .verdict.yes { color: var(--accent); border-color: #1f4035; }
+
+    figure {
+        margin: 36px 0;
+    }
+
+    figure svg { width: 100%; height: auto; display: block; }
+
+    figcaption {
+        font-size: 12px;
+        color: var(--text-dim);
+        margin-top: 12px;
+        text-align: center;
+    }
+
+    footer {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-dim);
+        padding: 24px;
+        border-top: 1px solid var(--border);
+        margin-top: 56px;
+    }
+
+    @media (max-width: 480px) {
+        main { padding: 32px 20px; }
+        h1 { font-size: 22px; }
+    }
+
+    </style>
+</head>
+<body>
+<main>
+
+    <a class="back" href="../../index.html">&larr; fernando de medicis</a>
+
+    <h1>I say two words. An AI changes my website. Another AI checks it first.</h1>
+    <p class="standfirst">
+        A voice note becomes a pull request, a second model reviews it, and low-risk changes
+        deploy themselves. The interesting part is not the speed &mdash; it is what had to be
+        true for it to be safe.
+    </p>
+    <p class="dateline">30 October 2026</p>
+
+    <p>
+        I sent a voice note to a private Discord channel:
+        <strong>&ldquo;photo me&rdquo;</strong>.
+        Two minutes and eleven seconds later, the photo on this site had changed &mdash; and no
+        human had touched the code, the pull request, or the merge button.
+    </p>
+
+    <p>
+        That is the visible part. Everything below is what had to be in place for it to be
+        <strong>safe</strong>.
+    </p>
+
+    <h2>Why I built it</h2>
+
+    <p>
+        The shift with AI is not &ldquo;AI writes code&rdquo;. It is that agents now do
+        multi-step work with real tools, and the human job moves from <em>doing</em> to
+        <strong>orchestrating and governing</strong>. I wanted hands-on practice in the rare
+        part of that skill: designing systems where an agent can act on its own &mdash; and
+        where it cannot, by construction.
+    </p>
+
+    <p>
+        So I set a deliberately small, deliberately public target: a spoken command that changes
+        my live landing page, going through the whole pipeline &mdash; understand, change,
+        independent review, deploy &mdash; with low-risk changes shipping by themselves and
+        high-risk ones waiting for me. Smallest possible blast radius, whole pipeline.
+    </p>
+
+    <h2>What happens when I speak</h2>
+
+    <figure>
+        <svg viewBox="0 0 640 660" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-label="Pipeline diagram: voice note, transcription, fixed intent table, confirmation, pull request opened by the agent's own identity, cross-model review, then either auto-merge for low risk or waiting for owner approval for high risk, then deploy and verification.">
+            <defs>
+                <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5"
+                        markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#4fd1a5"/>
+                </marker>
+                <style>
+                    .bx { fill: #12181f; stroke: #232b33; }
+                    .tx { fill: #d7dde3; font: 13px "Space Mono", monospace; }
+                    .dm { fill: #8b96a2; font: 11px "Space Mono", monospace; }
+                    .ac { fill: #4fd1a5; font: 12px "Space Mono", monospace; }
+                    .fl { stroke: #4fd1a5; stroke-width: 1.4; fill: none;
+                          marker-end: url(#ar); }
+                </style>
+            </defs>
+
+            <rect class="bx" x="170" y="8" width="300" height="46" rx="4"/>
+            <text class="tx" x="320" y="30" text-anchor="middle">voice note &mdash; Discord #lab</text>
+            <text class="dm" x="320" y="46" text-anchor="middle">that channel only, me only</text>
+            <path class="fl" d="M320 54 V 78"/>
+
+            <rect class="bx" x="170" y="80" width="300" height="46" rx="4"/>
+            <text class="tx" x="320" y="102" text-anchor="middle">transcribe + translate</text>
+            <text class="dm" x="320" y="118" text-anchor="middle">Whisper, then an English pass</text>
+            <path class="fl" d="M320 126 V 150"/>
+
+            <rect class="bx" x="140" y="152" width="360" height="46" rx="4"/>
+            <text class="tx" x="320" y="174" text-anchor="middle">match a fixed intent table</text>
+            <text class="dm" x="320" y="190" text-anchor="middle">nothing I say ever becomes code</text>
+            <path class="fl" d="M320 198 V 222"/>
+
+            <rect class="bx" x="170" y="224" width="300" height="46" rx="4"/>
+            <text class="tx" x="320" y="246" text-anchor="middle">it asks first</text>
+            <text class="dm" x="320" y="262" text-anchor="middle">react within 60 s or nothing happens</text>
+            <path class="fl" d="M320 270 V 294"/>
+
+            <rect class="bx" x="120" y="296" width="400" height="46" rx="4"/>
+            <text class="tx" x="320" y="318" text-anchor="middle">pull request, opened as itself</text>
+            <text class="dm" x="320" y="334" text-anchor="middle">own identity &middot; cannot edit CI &middot; cannot approve itself</text>
+            <path class="fl" d="M320 342 V 366"/>
+
+            <rect class="bx" x="120" y="368" width="400" height="60" rx="4" stroke="#1f4035"/>
+            <text class="ac" x="320" y="390" text-anchor="middle">cross-model review gate</text>
+            <text class="dm" x="320" y="406" text-anchor="middle">a different model reads the diff &mdash; and the image</text>
+            <text class="dm" x="320" y="421" text-anchor="middle">returns VALID / NOT VALID + risk tier + reasons</text>
+
+            <path class="fl" d="M220 428 V 450 H 140 V 476"/>
+            <path class="fl" d="M420 428 V 450 H 500 V 476"/>
+            <text class="dm" x="150" y="446">valid + low risk</text>
+            <text class="dm" x="380" y="446" text-anchor="end">high risk</text>
+
+            <rect class="bx" x="20" y="478" width="240" height="46" rx="4"/>
+            <text class="tx" x="140" y="500" text-anchor="middle">merges by itself</text>
+            <text class="dm" x="140" y="516" text-anchor="middle">no human in the loop</text>
+
+            <rect class="bx" x="380" y="478" width="240" height="46" rx="4"/>
+            <text class="tx" x="500" y="500" text-anchor="middle">waits for me</text>
+            <text class="dm" x="500" y="516" text-anchor="middle">that exact commit, by hand</text>
+
+            <path class="fl" d="M140 524 V 548 H 320 V 572"/>
+            <path class="fl" d="M500 524 V 548 H 322 V 572"/>
+
+            <rect class="bx" x="140" y="574" width="360" height="60" rx="4" stroke="#1f4035"/>
+            <text class="ac" x="320" y="596" text-anchor="middle">deployed, then verified</text>
+            <text class="dm" x="320" y="612" text-anchor="middle">the bot checks the live site serves the new file</text>
+            <text class="dm" x="320" y="627" text-anchor="middle">byte for byte &mdash; live in 131 s</text>
+        </svg>
+        <figcaption>
+            Voice to production. The two bordered boxes are the parts that make it governance
+            rather than automation.
+        </figcaption>
+    </figure>
+
+    <ol>
+        <li>
+            <strong>Discord <code>#lab</code></strong> &mdash; I send a voice note, or type. The
+            bot listens in that channel only, and only to me.
+        </li>
+        <li>
+            <strong>Transcription</strong> &mdash; Whisper turns it into text, with an English
+            pass, because I mix Spanish and English.
+        </li>
+        <li>
+            <strong>Intent, not code</strong> &mdash; the text can only select an entry from a
+            fixed table. Nothing I say ever becomes code, and a sentence containing a negation
+            (&ldquo;don&rsquo;t change&hellip;&rdquo;) is refused rather than guessed at.
+        </li>
+        <li>
+            <strong>It asks first</strong> &mdash; it tells me what it understood and waits for a
+            reaction within 60 seconds. No confirmation, nothing happens.
+        </li>
+        <li>
+            <strong>It opens a pull request &mdash; as itself.</strong> The agent acts through its
+            own GitHub App identity, not my account. That identity can open pull requests, but it
+            cannot change CI workflows and cannot approve its own work.
+        </li>
+        <li>
+            <strong>A second AI reviews it.</strong> My cross-model review gate sends the change
+            &mdash; including the image itself &mdash; to a different model, and gets back a
+            binary verdict, a risk tier and reasons, posted on the pull request.
+        </li>
+        <li>
+            <strong>Asymmetric authority.</strong>
+            <span class="verdict yes">VALID</span> and low risk, and a required approval check
+            passes on its own and the pull request merges itself. High risk &mdash; workflows,
+            security files, how the site is served &mdash; and that check fails until
+            <strong>I</strong> approve that exact commit.
+        </li>
+        <li>
+            <strong>Deploy and verify.</strong> GitHub Pages publishes, and the bot confirms the
+            live site serves the new file byte for byte before reporting back.
+        </li>
+    </ol>
+
+    <h2>The moment it said no</h2>
+
+    <p>
+        The first real run failed, and it is my favourite part of the whole thing.
+    </p>
+
+    <p>
+        My first design changed one line of HTML to point at a different photo already in the
+        repository. The gate answered <span class="verdict no">NOT VALID</span>: the referenced
+        image <em>&ldquo;is unavailable to inspect, so its suitability cannot be
+        verified&rdquo;</em>. A reviewer only sees what a pull request changes, and I was asking
+        it to approve a picture it had never been shown.
+    </p>
+
+    <p>
+        It was right. A one-line path change looks harmless, and it is exactly the shape of
+        change that could put anything on a public page. So I changed the design rather than the
+        gate: the page now always displays one fixed file, and a swap <strong>replaces that
+        file&rsquo;s contents</strong>. The pull request therefore carries the picture itself, and
+        the second model looks at it before anything can merge. The next run went through.
+    </p>
+
+    <p class="pull">
+        A gate is only worth having if it can stop you &mdash; and only worth trusting if, when
+        it does, you fix the cause instead of routing around it.
+    </p>
+
+    <h2>Governance, built in rather than bolted on</h2>
+
+    <ul>
+        <li>
+            <strong>Cross-model, not self-review.</strong> A model reviewing its own work is an
+            echo with the same blind spots. The gate is a separate, public project, and I tested
+            it against deliberately bad changes before trusting it: 13 out of 13 caught with each
+            of three providers, with the false positives traced and fixed.
+        </li>
+        <li>
+            <strong>No reviewer shopping.</strong> If a reviewer returns a verdict, that is the
+            verdict. It falls back to another model only when the first gives <em>no</em> answer
+            at all &mdash; an outage or a quota &mdash; never because I did not like the result.
+        </li>
+        <li>
+            <strong>Secrets never reach a model.</strong> A deterministic secret scan runs before
+            any AI sees the diff.
+        </li>
+        <li>
+            <strong>Its own identity, least privilege.</strong> The agent has only the permissions
+            it needs. It cannot edit workflows, and infrastructure changes are owner-only.
+        </li>
+        <li>
+            <strong>The rules live with the code.</strong> Each repository declares what counts as
+            high risk in its own instructions file, and the gate and the merge rules enforce that
+            in code rather than in good intentions.
+        </li>
+        <li>
+            <strong>Only images I have the right to publish</strong> &mdash; which is why the
+            alternates are a public-domain fox, owl and wolf. Rights are part of governance too.
+        </li>
+    </ul>
+
+    <h2>What it cost</h2>
+
+    <p>
+        Cents per change: one transcription, one small language pass, one review. No servers
+        &mdash; the bot runs on a machine I already have on, and GitHub Pages is free.
+    </p>
+
+    <h2>What is next</h2>
+
+    <p>
+        Each step widens the blast radius and needs more governance in step: a photo swap, then
+        content edits, then a new component, then a project from zero. Next is letting it
+        <em>find</em> an image rather than choose from a vetted set &mdash; public domain only,
+        shown to me first, credited automatically &mdash; with the gate looking at every picture
+        before it goes anywhere near the page.
+    </p>
+
+    <p>
+        The gate is open source:
+        <a href="https://github.com/fdmedicis/cross-model-review-gate" target="_blank" rel="noopener">github.com/fdmedicis/cross-model-review-gate</a>.
+    </p>
+
+</main>
+<footer>
+    No trackers. No cookies.
+</footer>
+</body>
+</html>
