@@ -4,8 +4,11 @@
 visibility: public
 -->
 
-My public landing page and portfolio. GitHub Pages serves `main` directly, so
-**whatever lands on `main` is live.** There is no deploy step to catch mistakes.
+My public landing page and portfolio. A Cloudflare Worker (`fdmedicis-github-io`) serves
+`fdmedicis.dev` and `www.fdmedicis.dev`, and Cloudflare Workers Builds rebuilds it from
+`main` on every push, so **whatever lands on `main` is live** within about two minutes.
+There is no deploy step to catch mistakes; the pull request is the only gate. The Worker and
+its Git connection are configured in the Cloudflare dashboard, not in this repo.
 
 ## Rules
 - **Public repo: every change goes through a pull request.** Never push to `main`.
@@ -28,4 +31,4 @@ My public landing page and portfolio. GitHub Pages serves `main` directly, so
   the CV file. High risk (escalate first): workflows, this file, security files,
   anything touching how the site is served.
 - `.github/workflows/deploy.yml` is a manual, optional AWS deploy (S3 + CloudFront).
-  It runs only by hand.
+  It runs only by hand and is not what serves `fdmedicis.dev`.
